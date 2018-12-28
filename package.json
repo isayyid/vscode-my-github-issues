@@ -1,0 +1,141 @@
+{
+    "name": "mygithubissues",
+    "displayName": "My Github Issues",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.30.0"
+    },
+    "categories": [
+        "git",
+        "zenhub",
+        "issues",
+        "todo"
+    ],
+    "activationEvents": [
+        "onView:mygithubissues"
+    ],
+    "main": "./extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "mygithubissues.open",
+                "title": "Open Issue"
+            },
+            {
+                "command": "mygithubissues.refresh",
+                "title": "Refresh Issue",
+                "icon": "icons/refresh.svg"
+            }
+        ],
+        "views": {
+            "explorer": [
+                {
+                    "id": "mygithubissues",
+                    "name": "My Github Issues"
+                }
+            ]
+        },
+        "menus": {
+            "view/item/context": [
+                {
+                    "group": "inline",
+                    "command": "mygithubissues.refresh",
+                    "when": "viewItem == issue"
+                },
+                {
+                    "group": "inline",
+                    "command": "mygithubissues.refresh",
+                    "when": "viewItem == pr"
+                },
+                {
+                    "group": "inline",
+                    "command": "mygithubissues.refresh",
+                    "when": "viewItem == repo"
+                }
+            ]
+        },
+        "configuration": [
+            {
+                "title": "My Github Issues",
+                "properties": {
+                    "mygithubissues.github": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "host": {
+                                    "type": "string",
+                                    "default": "",
+                                    "description": "Github host"
+                                },
+                                "token": {
+                                    "type": "string",
+                                    "default": "",
+                                    "description": "Github user api token"
+                                },
+                                "username": {
+                                    "type": "string",
+                                    "default": "",
+                                    "description": "Github username"
+                                },
+                                "zenhub": {
+                                    "type": "object",
+                                    "properties": {
+                                        "host": {
+                                            "type": "string",
+                                            "default": "",
+                                            "description": "Zenhub host"
+                                        },
+                                        "token": {
+                                            "type": "string",
+                                            "default": "",
+                                            "description": "Zenhub user api token"
+                                        }
+                                    },
+                                    "description": "Zenhub configuration details"
+                                },
+                                "orgs": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "name": {
+                                                "type": "string",
+                                                "default": "",
+                                                "description": "Name of the github organization"
+                                            },
+                                            "repos": {
+                                                "type": "array",
+                                                "description": "List of repos to track under this organization",
+                                                "default": []
+                                            }
+                                        }
+                                    },
+                                    "description": "List of organizations to track within this github host"
+                                }
+                            }
+                        },
+                        "default": [],
+                        "description": "List of github host configurations [ { 'host': 'github.com', 'token': 'api-token', 'username': 'isayyid', zenhub': { 'host': 'zenhub.com, 'token': 'zen-token'}, orgs: [{ 'name': 'isayyid', 'repos': [ 'bin', 'bar' ] } ]"
+                    }
+                }
+            }
+        ]
+    },
+    "scripts": {
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^8.10.25",
+        "eslint": "^4.11.0",
+        "typescript": "^3.1.4",
+        "vscode": "^1.1.26"
+    },
+    "dependencies": {
+        "@octokit/rest": "^16.3.0",
+        "marked": "^0.5.2",
+        "request-promise-native": "^1.0.5"
+    }
+}
