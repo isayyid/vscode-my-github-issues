@@ -275,7 +275,6 @@ class Pipeline extends Base {
         this.issues.push(issue);
     }
 }
-var today = new Date();
 
 function getType(issue) {
     let type = (issue.state !== 'closed' ) ? TypeEnum.ISSUE : TypeEnum.ISSUE_CLOSED;
@@ -288,6 +287,7 @@ function getTitle(issue) {
     if (getType(issue) !== TypeEnum.PR) {
         return title;
     } else {
+        let today = new Date();
         let updated = new Date(issue.updated_at);
         let diffDays = Math.floor((today.getTime() - updated.getTime()) / (3600 * 24 * 1000)); // exact dates
         let diffHrs = Math.floor((today.getTime() - updated.getTime()) / (3600 * 1000)); // exact dates
