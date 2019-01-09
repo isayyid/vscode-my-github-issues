@@ -291,7 +291,7 @@ function getTitle(issue) {
         let updated = new Date(issue.updated_at);
         let diffDays = Math.floor((today.getTime() - updated.getTime()) / (3600 * 24 * 1000)); // exact dates
         let diffHrs = Math.floor((today.getTime() - updated.getTime()) / (3600 * 1000)); // exact dates
-        if (diffDays >= 0) {
+        if (diffDays > 0) {
             title = title + " - (" + diffDays + " days ago)";
         } else {
             title = title + " - (" + diffHrs + " hrs ago)";
