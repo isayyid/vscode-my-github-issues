@@ -3,18 +3,14 @@
 const git = require('./api.js');
 
 var api = new git.GitHub({
-    host: "github.ibm.com",
-    token: "74dc7f36a89fddf1b095f60d57919b4e3bea48b2",
+    host: "github.com",
+    token: "",
     username: "isayyid",
     zenhub: {
-        host: "zenhub.ibm.com",
-        token: "96690e0097a3928c4a6ca6d43c281870bb1b4fd6d2125e13ee3ccc4741620b616947ef92eb22234e"
+        host: "zenhub.com",
+        token: ""
     },
     orgs: [
-        {
-            name: "htap-ng",
-            repos: [ "htap-ng"]
-        },
         {
             name: "isayyid",
             repos: ["bin", "mydocs"]
